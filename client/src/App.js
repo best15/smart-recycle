@@ -10,7 +10,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 // import Home from './pages/Home';
 // import Profile from './pages/Profile';
-// import Signup from './pages/Signup';
+import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Header from './components/Header';
 // import Footer from './components/Footer';
@@ -44,18 +44,21 @@ function App() {
       <Router>
         {/* <div className="flex-column justify-flex-start min-100-vh"> */}
         <Header />
-        {/* <Route exact path="/login"> */}
-        <Login />
-        {/* </Route> */}
+        <Route exact path="/">
+          <Login />
+        </Route>
+
+        <Route exact path="/signup">
+          <Signup />
+        </Route>
+
         {/* <div className="container">
             <Route exact path="/">
               <Home />
             </Route>
             
            
-            <Route exact path="/signup">
-              <Signup />
-            </Route>
+           
 
           </div>
           <Footer /> */}
