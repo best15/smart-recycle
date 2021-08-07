@@ -1,0 +1,18 @@
+/* .ui.inverted.top.fixed.menu {
+  background-color: darkslategrey;
+} */
+
+.header {
+  background-color: teal !important;
+}
+
+.ui.inverted.menu .item {
+  font-size: xx-large;
+}
+
+.ui.container {
+  justify-content: center;
+}
+.ui.menu .item:after {
+  height: none;
+}
