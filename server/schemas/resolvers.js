@@ -1,40 +1,38 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { Profile } = require('../models');
+const { User } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
-    profiles: async () => {
-      return Profile.find();
+    users: async () => {
+      return User.find();
     },
-
-    profile: async (parent, { profileId }) => {
-      return Profile.findOne({ _id: profileId });
+    user: async (parent, { username }) => {
+      return User.findOne({ username });
     },
   },
 
   Mutation: {
-    createProfile: async (parent, { userName, password }) => {
-      const profile = await Profile.create({ userName, password });
-      const token = signToken(profile);
-
-      return { token, profile };
+    addUser: async (parent, { username, password }) => {
+      const user = await User.create({ username, password });
+      const token = signToken(user);
+      return { token, user };
     },
-    login: async (parent, { userName, password }) => {
-      const profile = await Profile.findOne({ userName });
+    login: async (parent, { username, password }) => {
+      const user = await User.findOne({ username });
 
-      if (!profile) {
-        throw new AuthenticationError('No profile with this userName found!');
+      if (!user) {
+        throw new AuthenticationError('Incorrect username');
       }
 
-      const correctPw = await profile.isCorrectPassword(password);
+      const correctPw = await user.isCorrectPassword(password);
 
       if (!correctPw) {
         throw new AuthenticationError('Incorrect password!');
       }
 
-      const token = signToken(profile);
-      return { token, profile };
+      const token = signToken(user);
+      return { token, user };
     },
 
   },
