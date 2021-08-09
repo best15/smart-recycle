@@ -19,7 +19,7 @@ const Header = () => {
                 <Container>
 
                     <Menu.Item as='a' header>
-                        {/* <Image size='mini' src='/logo.png' style={{ marginRight: '1.5em' }} /> */}
+                        <i className="recycle-icon fa fa-recycle" aria-hidden="true" />
                         Smart Recycle
                     </Menu.Item>
                 </Container>
