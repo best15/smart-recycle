@@ -4,6 +4,9 @@ import decode from 'jwt-decode';
 // create a new class to instantiate for a user
 class AuthService {
 
+  getProfile() {
+    return decode(this.getToken());
+  }
   // return `true` or `false` if token exists (does not verify if it's expired yet)
   loggedIn() {
     const token = this.getToken();

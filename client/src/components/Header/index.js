@@ -3,7 +3,7 @@ import "../../assets/styles/Header.css"
 
 import Auth from '../../utils/auth';
 
-import { Container, Menu, } from 'semantic-ui-react'
+import { Container, Menu, Button } from 'semantic-ui-react'
 
 const Header = () => {
 
@@ -15,21 +15,27 @@ const Header = () => {
     return (
         <div>
             <Menu className="header" fixed='top' inverted >
+
                 <Container>
+
                     <Menu.Item as='a' header>
                         {/* <Image size='mini' src='/logo.png' style={{ marginRight: '1.5em' }} /> */}
                         Smart Recycle
                     </Menu.Item>
-                    <div>
-                        {Auth.loggedIn() ? (
-                            <button onClick={logout}>
-                                Logout
-                            </button>
-
-                        ) : (""
-                        )}
-                    </div>
                 </Container>
+
+                {Auth.loggedIn() ? (
+                    <>
+                        <span className="greet"> Welcome, {Auth.getProfile().data.username}!</span>
+                        <Button className="logout"
+                            onClick={logout}>Logout</Button>
+
+                    </>
+                ) : ("")}
+
+
+
+
             </Menu>
 
         </div>

@@ -85,7 +85,7 @@ const SingupForm = () => {
                             </Segment>
                         </Form>
                         <Message>
-                            Already Registered? <Link to={`/`}>Login</Link>
+                            Already Registered? <Link to={`/login`}>Login</Link>
                         </Message>
 
                     </Grid.Column>
