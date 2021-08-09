@@ -1,0 +1,31 @@
+/* .ui.inverted.top.fixed.menu {
+  background-color: darkslategrey;
+} */
+
+.header {
+  background-color: teal !important;
+}
+
+.ui.inverted.menu .item {
+  font-size: xx-large;
+}
+
+/* .ui.container {
+  justify-content: center;
+} */
+.ui.menu .item:after {
+  height: none;
+}
+
+.greet {
+  min-width: fit-content !important;
+  margin-right: 4%;
+  align-self: center;
+  justify-self: center;
+}
+.logout {
+  background: white !important;
+  margin-right: 2%;
+  align-self: center;
+  justify-self: center;
+}
