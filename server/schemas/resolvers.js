@@ -1,6 +1,13 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { User, Category, Material, RecycleCenter } = require('../models');
 const { signToken } = require('../utils/auth');
+const categorySeed = require("../seed/categorySeeds.json");
+
+// const fs = require("fs");
+// const rawData = fs.readFile("../seed/categorySeeds.json", 'utf8');
+
+
+
 
 const resolvers = {
   Query: {
@@ -26,6 +33,25 @@ const resolvers = {
   },
 
   Mutation: {
+
+    createDefaultCategory: async () => {
+
+      await Category.deleteMany({});
+      const categories = await Category.insertMany(categorySeed);
+
+      // categorySeed.map(async (category) => {
+      //   console.log(category)
+      //   if (category) {
+      //     let name = category.categoryname;
+      //     const category = await Category.create({ name })
+      //     return { category }
+      //   }
+
+      // })
+
+    },
+
+
     addUser: async (parent, { username, password }) => {
       const user = await User.create({ username, password });
       const token = signToken(user);

@@ -24,3 +24,18 @@ export const LOGIN_USER = gql`
     }
   }
 `;
+
+export const CREATE_CATEGORIES = gql`
+mutation createDefaultCategory
+{
+  createDefaultCategory{
+    _id
+    categoryname
+    materials {
+      _id
+      materialname
+    }
+  }
+}
+
+`;
