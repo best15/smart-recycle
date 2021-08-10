@@ -37,7 +37,7 @@ const resolvers = {
     createDefaultCategory: async () => {
 
       await Category.deleteMany({});
-      const categories = await Category.insertMany(categorySeed);
+      await Category.create(categorySeed);
 
       // categorySeed.map(async (category) => {
       //   console.log(category)
