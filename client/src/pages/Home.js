@@ -1,40 +1,56 @@
-import React from 'react'
-import "../assets/styles/Home.css"
+import React, { useState } from 'react';
+import { useQuery } from '@apollo/client';
+
+import "../assets/styles/Home.css";
+
+import { QUERY_CATEGORIES } from '../utils/queries';
+
+const Home = () => {
+
+    let [selectedCategoryName, setSelectedCategory] = useState("Metal");
+
+    const { loading, data } = useQuery(QUERY_CATEGORIES);
+    const categories = data?.categories || [];
 
 
-const Home = () => (
+    const onClickCategory = async (event) => {
+        event.preventDefault();
+        const selectedCategory = event.target;
+        setSelectedCategory(selectedCategoryName = selectedCategory.innerText);
 
-    <div className="home">
-        <div className="page-header ui container">
-            <h2>Check Your Item, Find A Recycle Center</h2>
-        </div>
+    }
 
-        <div className="materials">
-            <div className="category-section ui five column grid container">
-                <div className="category   column">Electronics</div>
-                <div className="category   column">Glass</div>
-                <div className="category   column">Metal</div>
-                <div className="category   column">Paper</div>
-                <div className="category   column">Plastic</div>
-                <div className="category   column">Organic Waste</div>
-                <div className="category   column">Household</div>
-                <div className="category   column">Hazardous</div>
-                <div className="category   column">Automotive</div>
-                <div className="category   column">Construction</div>
+    return (
+
+        <div className="home">
+            <div className="page-header ui container">
+                <h2>SEARCH FIND AND RECYCLE </h2>
             </div>
-            <div className="ui five column grid container">
-                <ul className="row itemlist">
-                    <li className="items column">Small Appliances</li>
-                    <li className="items column">Plastic</li>
-                    <li className="items column">Construction Materials</li>
-                    <li className="items column">Cups</li>
-                    <li className="items column">Batteries
-                    </li>
-                </ul>
 
+            <div className="materials">
+                <div className="category-section ui five column grid container">
+                    {loading ? (<h3>Loading....</h3>) :
+                        (categories.map((category) => (
+                            <div key={category._id}
+                                className={selectedCategoryName === category.categoryname ? "category column selected" : "category column"}
+                                onClick={onClickCategory}>{category.categoryname}</div>
+                        )))}
+
+                </div>
+                <div className="ui five column grid container">
+                    <ul className="row itemlist">
+
+                        {(categories.map((category) => (category.categoryname === selectedCategoryName) ? (
+                            <li key={category._id} className="items column">{category.categoryname}</li>) : (<> </>)
+                        ))}
+
+
+                    </ul>
+
+                </div>
             </div>
         </div>
-    </div>
-)
+    )
+};
 
 export default Home;

@@ -12,10 +12,31 @@ const typeDefs = gql`
     token: ID!
     user: User
   }
+  type Material {
+    _id: ID
+    materialname: String
+      
+  }
+  type MaterialCategory {
+    _id: ID
+    categoryname: String
+    materials: [Material]
+  }
+
+  type RecycleCenter {
+    _id: ID
+    centername: String
+    address: String
+    materials: [Material]
+  }
+
 
   type Query {
     users: [User]
     user(username: String!): User
+    materials: [Material]
+    recycleCenters: [RecycleCenter]
+    categories: [MaterialCategory]
     
   }
 

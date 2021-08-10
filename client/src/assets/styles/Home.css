@@ -21,6 +21,11 @@
   border: white solid 1px;
 }
 
+.selected {
+  background-color: teal;
+  color: whitesmoke;
+}
+
 .category:hover {
   background-color: teal;
   color: whitesmoke;

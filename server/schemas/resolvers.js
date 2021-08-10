@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User } = require('../models');
+const { User, Category, Material, RecycleCenter } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -10,6 +10,19 @@ const resolvers = {
     user: async (parent, { username }) => {
       return User.findOne({ username });
     },
+    categories: async () => {
+
+      const categories = await Category.find({}).populate('materials');
+
+
+      return categories;
+    },
+    materials: async () => {
+      return await Material.find({});
+    },
+    recycleCenters: async () => {
+      return RecycleCenter.find({}).populate('materials');;
+    }
   },
 
   Mutation: {
