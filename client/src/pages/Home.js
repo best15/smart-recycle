@@ -3,20 +3,37 @@ import { useQuery } from '@apollo/client';
 
 import "../assets/styles/Home.css";
 
-import { QUERY_CATEGORIES, QUERY_MATERIALS } from '../utils/queries';
+import { QUERY_CATEGORIES, QUERY_MATERIALS, QUERY_CATEGORIES_AND_MATERIALS } from '../utils/queries';
+
 
 
 const Home = () => {
-    const { m_loading, m_data } = useQuery(QUERY_MATERIALS);
-    console.log(m_data);
-    const materials = m_data?.materials || [];
 
+    // const { loading1, data1 } = useQuery(QUERY_CATEGORIES_AND_MATERIALS);
+    // console.log(data1);
+    // const categories1 = data1?.categories || [];
+
+    // const [cat, mat] = useQuery([QUERY_CATEGORIES, QUERY_MATERIALS]);
+    // const { loading, data } = cat;
+    // const categories = data?.cat || [];
+
+    // const queryMultiple = () => {
+    //     const res1 = useQuery(QUERY_CATEGORIES);
+    //     const res2 = useQuery(QUERY_MATERIALS);
+    //     return [res1, res2];
+    // }
+
+    // const [
+    //     { loading: loading1, data: data1 },
+    //     { loading: loading2, data: data2 }
+    // ] = queryMultiple()
+    // const categories = data1?.categories || [];
 
     const { loading, data } = useQuery(QUERY_CATEGORIES);
     const categories = data?.categories || [];
 
 
-    const [allMaterials, setAllMaterials] = useState(materials);
+    // const [allMaterials, setAllMaterials] = useState(materials);
     const [selectedViewState, setSelectedViewState] = useState("search");
     const [selectedCategoryName, setSelectedCategory] = useState("Metal");
     const [selectedSearchMaterial, setSelectedSearchMaterial] = useState("");
@@ -72,7 +89,8 @@ const Home = () => {
                                 <input className="searchmaterial prompt" type="text" placeholder="Search materials like plastic,glass..." value={selectedSearchMaterial} onChange={handleChange} />
                                 <i className="search icon" />
                             </div>
-                            <div className="results">{allMaterials}</div>
+                            {(categories.map((category) =>
+                                <div className="results">{category.categoryname}</div>))}
                         </div>
                     </div>
                     <div className="four wide column">

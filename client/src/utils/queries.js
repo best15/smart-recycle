@@ -28,3 +28,19 @@ query materials{
   }
 }
 `;
+
+export const QUERY_CATEGORIES_AND_MATERIALS = gql`
+query getcategoriesandmaterials{
+  categories {
+    _id
+    categoryname
+    materials{
+      materialname
+    }               
+  }
+materials {
+    _id
+    materialname
+  }
+}
+`;

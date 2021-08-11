@@ -14,14 +14,13 @@ const resolvers = {
       return User.findOne({ username });
     },
     categories: async () => {
-
       const categories = await Category.find({}).populate('materials');
-
-
       return categories;
     },
     materials: async () => {
-      return await Material.find({});
+      const materials = await Material.find({});
+
+      return materials;
     },
     recycleCenters: async () => {
       return RecycleCenter.find({}).populate('materials');;
@@ -34,7 +33,7 @@ const resolvers = {
       let newCategory;
       let newMaterial;
 
-      console.log("createDefaultCategory");
+
       categorySeed.map(async (category, index) => {
         let sanitizedName = category.categoryname.trim();
 
