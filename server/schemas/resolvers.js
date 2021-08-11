@@ -3,10 +3,6 @@ const { User, Category, Material, RecycleCenter } = require('../models');
 const { signToken } = require('../utils/auth');
 const categorySeed = require("../seed/categorySeeds.json");
 
-// const fs = require("fs");
-// const rawData = fs.readFile("../seed/categorySeeds.json", 'utf8');
-
-
 
 
 const resolvers = {
@@ -35,20 +31,46 @@ const resolvers = {
   Mutation: {
 
     createDefaultCategory: async () => {
+      let newCategory;
+      let newMaterial;
 
-      await Category.deleteMany({});
-      await Category.create(categorySeed);
+      console.log("createDefaultCategory");
+      categorySeed.map(async (category, index) => {
+        let sanitizedName = category.categoryname.trim();
 
-      // categorySeed.map(async (category) => {
-      //   console.log(category)
-      //   if (category) {
-      //     let name = category.categoryname;
-      //     const category = await Category.create({ name })
-      //     return { category }
-      //   }
+        try {
+          let categoryCheck = await Category.findOne({ categoryname: sanitizedName });
 
-      // })
+          if (!categoryCheck) {
+            newCategory = await Category.create({ categoryname: sanitizedName });
+          } else {
+            newCategory = categoryCheck
+          }
+        } catch {
+          return
+        }
 
+        if (category.materialnames) {
+          category.materialnames.map(async (materialname) => {
+            let sanitizedMaterialName = materialname.trim();
+            try {
+              let checkMaterial = await Material.findOne({ materialname: sanitizedMaterialName });
+
+              if (!checkMaterial) {
+                newMaterial = await Material.create({ materialname: sanitizedMaterialName });
+              } else {
+                newMaterial = checkMaterial
+              }
+            } catch {
+              return
+            }
+            const updateCategory = await Category.findOneAndUpdate({ categoryname: sanitizedName }, { $addToSet: { materials: newMaterial._id } })
+            if (updateCategory) {
+              console.log('Category updated with materials', updateCategory.categoryname)
+            }
+          })
+        }
+      })
     },
 
 

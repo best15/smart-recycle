@@ -10,27 +10,14 @@ db.once('open', async () => {
         await Material.deleteMany({});
 
 
-        await Category.create(categoryseeds);
-        await Material.create(materialseeds);
+        // await Category.create(categoryseeds);
+        // await Material.create(materialseeds);
     } catch (err) {
         console.error(err);
         process.exit(1);
     }
 
-    console.log('Categories and Materials seeded');
+    console.log('Categories and Materials Deleted');
     process.exit(0);
 });
 
-// db.once('open', async () => {
-//     try {
-
-//         await User.deleteMany({});
-
-//     } catch (err) {
-//         console.error(err);
-//         process.exit(1);
-//     }
-
-//     console.log('all done!');
-//     process.exit(0);
-// });

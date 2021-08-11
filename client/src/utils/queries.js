@@ -14,6 +14,9 @@ export const QUERY_CATEGORIES = gql`
     categories {
       _id
       categoryname
+      materials{
+        materialname
+      }
     }
   }
 `;

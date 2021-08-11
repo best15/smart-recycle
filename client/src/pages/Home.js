@@ -5,6 +5,7 @@ import "../assets/styles/Home.css";
 
 import { QUERY_CATEGORIES } from '../utils/queries';
 
+
 const Home = () => {
 
     let [selectedCategoryName, setSelectedCategory] = useState("Metal");
@@ -12,17 +13,22 @@ const Home = () => {
     const { loading, data } = useQuery(QUERY_CATEGORIES);
     const categories = data?.categories || [];
 
-
-    const onClickCategory = async (event) => {
+    console.log(categories);
+    const selectCategory = async (event) => {
         event.preventDefault();
         const selectedCategory = event.target;
         setSelectedCategory(selectedCategoryName = selectedCategory.innerText);
 
     }
 
-    const onClickSearch = async () => {
+    const onClickSearch = async (event) => {
         const location = document.querySelector(".location").value.trim();
         const material = document.querySelector(".material").value.trim();
+        window.location.assign("/centers");
+    }
+    const onClickMaterials = async (event) => {
+
+        document.querySelector(".material").value = event.target.innerText;
 
     }
 
@@ -64,7 +70,7 @@ const Home = () => {
                         (categories.map((category) => (
                             <div key={category._id}
                                 className={selectedCategoryName === category.categoryname ? "category column selected" : "category column"}
-                                onClick={onClickCategory}>{category.categoryname}</div>
+                                onClick={selectCategory}>{category.categoryname}</div>
                         )))}
 
                 </div>
@@ -72,7 +78,8 @@ const Home = () => {
                     <ul className="row itemlist">
 
                         {(categories.map((category) => (category.categoryname === selectedCategoryName) ? (
-                            <li key={category._id} className="items column">{category.categoryname}</li>) : (<> </>)
+                            category.materials.map((material) => <li key={material.materialname} className="items column" onClick={onClickMaterials}>{material.materialname}</li>))
+                            : (<> </>)
                         ))}
 
 
