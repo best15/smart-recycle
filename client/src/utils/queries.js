@@ -20,3 +20,11 @@ export const QUERY_CATEGORIES = gql`
     }
   }
 `;
+export const QUERY_MATERIALS = gql`
+query materials{
+  materials {
+    _id
+    materialname
+  }
+}
+`;

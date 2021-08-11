@@ -1,94 +1,124 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { useQuery } from '@apollo/client';
 
 import "../assets/styles/Home.css";
 
-import { QUERY_CATEGORIES } from '../utils/queries';
+import { QUERY_CATEGORIES, QUERY_MATERIALS } from '../utils/queries';
 
 
 const Home = () => {
+    const { m_loading, m_data } = useQuery(QUERY_MATERIALS);
+    console.log(m_data);
+    const materials = m_data?.materials || [];
 
-    let [selectedCategoryName, setSelectedCategory] = useState("Metal");
 
     const { loading, data } = useQuery(QUERY_CATEGORIES);
     const categories = data?.categories || [];
 
-    console.log(categories);
+
+    const [allMaterials, setAllMaterials] = useState(materials);
+    const [selectedViewState, setSelectedViewState] = useState("search");
+    const [selectedCategoryName, setSelectedCategory] = useState("Metal");
+    const [selectedSearchMaterial, setSelectedSearchMaterial] = useState("");
+
+    const backtoSearch = async (event) => {
+        setSelectedViewState("search");
+
+    }
+
+    const handleChange = async (event) => {
+        setSelectedSearchMaterial(event.target.value);
+    }
+
     const selectCategory = async (event) => {
         event.preventDefault();
         const selectedCategory = event.target;
-        setSelectedCategory(selectedCategoryName = selectedCategory.innerText);
+        setSelectedCategory(selectedCategory.innerText);
 
     }
 
     const onClickSearch = async (event) => {
-        const location = document.querySelector(".location").value.trim();
-        const material = document.querySelector(".material").value.trim();
-        window.location.assign("/centers");
+        setSelectedViewState("results");
     }
+
+
     const onClickMaterials = async (event) => {
 
-        document.querySelector(".material").value = event.target.innerText;
+        setSelectedSearchMaterial(event.target.innerText);
 
     }
 
-    return (
+    if (selectedViewState === "search") {
+        return (
 
-        <div className="home">
+            <div className="home">
 
-            <div className="page-header ui container">
-                <h2>SEARCH FIND AND RECYCLE </h2>
-            </div>
-            <div className=" ui grid container">
-                <div className="four wide column">
-                    <div className="ui search">
-                        <div className="ui large fluid icon input">
-                            <input className="location prompt" type="text" placeholder="Location" />
-                            <i className="search icon" />
+                <div className="page-header ui container">
+                    <h2>SEARCH FIND AND RECYCLE </h2>
+                </div>
+                <div className=" ui grid container">
+                    <div className="four wide column">
+                        <div className="ui search">
+                            <div className="ui large fluid icon input">
+                                <input className="searchlocation prompt" type="text" placeholder="Location" />
+                                <i className="search icon" />
+                            </div>
+                            <div className="results"></div>
                         </div>
-                        <div className="results"></div>
+                    </div>
+                    <div className="eight wide column">
+                        <div className="ui search">
+                            <div className="ui large fluid icon input">
+                                <input className="searchmaterial prompt" type="text" placeholder="Search materials like plastic,glass..." value={selectedSearchMaterial} onChange={handleChange} />
+                                <i className="search icon" />
+                            </div>
+                            <div className="results">{allMaterials}</div>
+                        </div>
+                    </div>
+                    <div className="four wide column">
+                        <button className="ui large fluid teal button" onClick={onClickSearch}>
+                            Search
+                        </button>
                     </div>
                 </div>
-                <div className="eight wide column">
-                    <div className="ui search">
-                        <div className="ui large fluid icon input">
-                            <input className="material prompt" type="text" placeholder="Search materials like plastic,glass..." />
-                            <i className="search icon" />
-                        </div>
-                        <div className="results"></div>
+                <div className="materials">
+                    <div className="category-section ui five column grid container">
+                        {loading ? (<h3>Loading....</h3>) :
+                            (categories.map((category) => (
+                                <div key={category._id}
+                                    className={selectedCategoryName === category.categoryname ? "category column selected" : "category column"}
+                                    onClick={selectCategory}>{category.categoryname}</div>
+                            )))}
+
+                    </div>
+                    <div className="ui five column grid container">
+                        <ul className="row itemlist">
+
+                            {(categories.map((category) => (category.categoryname === selectedCategoryName) ? (
+                                category.materials.map((material) => <li key={material.materialname} className="items column" onClick={onClickMaterials}>{material.materialname}</li>))
+                                : (<> </>)
+                            ))}
+
+
+                        </ul>
+
                     </div>
                 </div>
-                <div className="four wide column">
-                    <button className="ui large fluid teal button" onClick={onClickSearch}>
-                        Search
-                    </button>
-                </div>
             </div>
-            <div className="materials">
-                <div className="category-section ui five column grid container">
-                    {loading ? (<h3>Loading....</h3>) :
-                        (categories.map((category) => (
-                            <div key={category._id}
-                                className={selectedCategoryName === category.categoryname ? "category column selected" : "category column"}
-                                onClick={selectCategory}>{category.categoryname}</div>
-                        )))}
+        )
 
-                </div>
-                <div className="ui five column grid container">
-                    <ul className="row itemlist">
+    }
+    else if (selectedViewState === "results") {
 
-                        {(categories.map((category) => (category.categoryname === selectedCategoryName) ? (
-                            category.materials.map((material) => <li key={material.materialname} className="items column" onClick={onClickMaterials}>{material.materialname}</li>))
-                            : (<> </>)
-                        ))}
+        return (
+            <Fragment> <h1>Listing</h1>
+                <button onClick={backtoSearch}>Back to Search</button>
+            </Fragment>
+        )
+    }
+    else {
+        return (<> </>);
+    }
 
-
-                    </ul>
-
-                </div>
-            </div>
-        </div>
-    )
 };
-
 export default Home;
