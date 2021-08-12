@@ -129,8 +129,27 @@ const Home = () => {
     else if (selectedViewState === "results") {
 
         return (
-            <Fragment> <h1>Listing</h1>
-                <button onClick={backtoSearch}>Back to Search</button>
+            <Fragment>
+                <div className="container">
+                    <div className="back">
+
+                        <button className="ui  teal button" onClick={backtoSearch}>
+                            <i className="arrow alternate circle left outline icon large fluid" onClick={backtoSearch} />
+                            Back to Search
+                        </button>
+                    </div>
+                    <div className="results">
+
+
+                        <h1>Recycle Centers Nearby</h1>
+
+                        <div className="ui one column grid">
+                            <div className="row">
+                                center
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </Fragment>
         )
     }

@@ -5,7 +5,13 @@
   justify-content: space-evenly;
   align-items: center;
 }
-
+.results {
+  display: flex;
+  flex-direction: column;
+  min-height: 90vh;
+  justify-content: flex-start;
+  align-items: center;
+}
 .page-header {
   text-align: center;
   color: teal;
@@ -41,4 +47,8 @@
 .items:hover {
   background: rgb(223, 220, 220);
   cursor: pointer;
+}
+
+.back {
+  margin-top: 2%;
 }
