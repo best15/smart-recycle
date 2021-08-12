@@ -80,7 +80,7 @@ const Home = () => {
             const response = await axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
                 params: {
                     address: searchlocation,
-                    key: 'AIzaSyDvKa9BpFD5SgbVVc8Lo4s-NiZl4hXyj3E'
+                    key: ''
                 }
             }).then(function (response) {
                 console.log(response);
