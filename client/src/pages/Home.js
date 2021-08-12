@@ -1,5 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import { useQuery } from '@apollo/client';
+import axios from 'axios';
+// const axios = require('axios').default;
 
 import "../assets/styles/Home.css";
 
@@ -32,19 +34,37 @@ const Home = () => {
     const { loading, data } = useQuery(QUERY_CATEGORIES);
     const categories = data?.categories || [];
 
+    //Get all materials
+    function getMaterials() {
+        let materials = [];
+        categories.map((category) => {
+            category.materials.map((material) => {
+                materials.push(material.materialname);
+            })
+        })
+        return materials;
+    }
 
-    // const [allMaterials, setAllMaterials] = useState(materials);
+    const materials = getMaterials();
+
+    const [allMaterials, setAllMaterials] = useState(materials);
     const [selectedViewState, setSelectedViewState] = useState("search");
     const [selectedCategoryName, setSelectedCategory] = useState("Metal");
     const [selectedSearchMaterial, setSelectedSearchMaterial] = useState("");
+    const [searchlocation, setSearchLocation] = useState("");
 
     const backtoSearch = async (event) => {
+
         setSelectedViewState("search");
 
     }
 
-    const handleChange = async (event) => {
+    const handleChangeSearchMaterials = async (event) => {
         setSelectedSearchMaterial(event.target.value);
+    }
+
+    const handleChangeSearchLocation = async (event) => {
+        setSearchLocation(event.target.value);
     }
 
     const selectCategory = async (event) => {
@@ -55,6 +75,22 @@ const Home = () => {
     }
 
     const onClickSearch = async (event) => {
+
+        try {
+            const response = await axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+                params: {
+                    address: searchlocation,
+                    key: 'AIzaSyDvKa9BpFD5SgbVVc8Lo4s-NiZl4hXyj3E'
+                }
+            }).then(function (response) {
+                console.log(response);
+                console.log(response.data.results[0].formatted_address, response.data.results[0].geometry.location);
+            })
+        } catch (error) {
+            console.error(error);
+        }
+        console.log(searchlocation);
+
         setSelectedViewState("results");
     }
 
@@ -77,7 +113,7 @@ const Home = () => {
                     <div className="four wide column">
                         <div className="ui search">
                             <div className="ui large fluid icon input">
-                                <input className="searchlocation prompt" type="text" placeholder="Location" />
+                                <input className="searchlocation prompt" value={searchlocation} onChange={handleChangeSearchLocation} type="text" placeholder="Location" />
                                 <i className="search icon" />
                             </div>
                             <div className="results"></div>
@@ -86,7 +122,7 @@ const Home = () => {
                     <div className="eight wide column">
                         <div className="ui search">
                             <div className="ui large fluid icon input">
-                                <input className="searchmaterial prompt" type="text" placeholder="Search materials like plastic,glass..." value={selectedSearchMaterial} onChange={handleChange} />
+                                <input className="searchmaterial prompt" type="text" placeholder="Search materials like plastic,glass..." value={selectedSearchMaterial} onChange={handleChangeSearchMaterials} />
                                 <i className="search icon" />
                             </div>
                             {(categories.map((category) =>

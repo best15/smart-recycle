@@ -11,7 +11,6 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
-import Centers from './pages/RecycleCenters';
 import Header from './components/Header';
 
 // import Footer from './components/Footer';
@@ -53,9 +52,6 @@ function App() {
         <Header />
         <Route exact path="/">
           {Auth.loggedIn() ? (<Home />) : <Login />}
-        </Route>
-        <Route exact path="/Centers">
-          {Auth.loggedIn() ? (<Centers />) : <Login />}
         </Route>
         <Route exact path="/login">
           <Login />
