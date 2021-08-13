@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import axios from 'axios';
+import distanceCalculator from "../utils/distance"
 // const axios = require('axios').default;
 
 import "../assets/styles/Home.css";
@@ -75,21 +76,23 @@ const Home = () => {
     }
 
     const onClickSearch = async (event) => {
+        console.log(distanceCalculator(-31.93452, 115.8859545, -31.9106372, 115.8251195));
 
-        try {
-            const response = await axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
-                params: {
-                    address: searchlocation,
-                    key: ''
-                }
-            }).then(function (response) {
-                console.log(response);
-                console.log(response.data.results[0].formatted_address, response.data.results[0].geometry.location);
-            })
-        } catch (error) {
-            console.error(error);
-        }
-        console.log(searchlocation);
+        // Get search locations
+        // try {
+        //     const response = await axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+        //         params: {
+        //             address: searchlocation,
+        //             key: process.env.APP_ID
+        //         }
+        //     }).then(function (response) {
+        //         console.log(response);
+        //         console.log(response.data.results[0].formatted_address, response.data.results[0].geometry.location);
+        //     })
+        // } catch (error) {
+        //     console.error(error);
+        // }
+
 
         setSelectedViewState("results");
     }
@@ -177,12 +180,15 @@ const Home = () => {
                     <div className="results">
 
 
-                        <h1>Recycle Centers Nearby</h1>
+                        <h1>Recycle Centres Nearby</h1>
 
                         <div className="ui one column grid">
                             <div className="row">
                                 center
                             </div>
+                            {/* <a src='https://www.google.com/maps/search/?api=1&query=optus+stadium' className="row">
+                                Get Direction
+                            </a> */}
                         </div>
                     </div>
                 </div>

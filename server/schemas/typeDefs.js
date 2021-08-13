@@ -25,9 +25,11 @@ const typeDefs = gql`
 
   type RecycleCenter {
     _id: ID
-    centername: String
+    name: String
     address: String
-    materials: [Material]
+    lattitude: Float
+    longitude: Float
+    recycling_materials: [String]
   }
 
 

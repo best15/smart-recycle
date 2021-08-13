@@ -19,11 +19,10 @@ const resolvers = {
     },
     materials: async () => {
       const materials = await Material.find({});
-
       return materials;
     },
     recycleCenters: async () => {
-      return RecycleCenter.find({}).populate('materials');;
+      return RecycleCenter.find({});
     }
   },
 

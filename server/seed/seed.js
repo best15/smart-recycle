@@ -1,14 +1,16 @@
 const db = require('../config/connection');
 const { User, Category, Material, RecycleCenter } = require('../models');
 const categoryseeds = require('./categorySeeds.json')
-const materialseeds = require('./materialsSeeds.json')
+const recycleCenterSeeds = require('./recycleCenterSeeds.json')
 
 
 db.once('open', async () => {
     try {
-        await Category.deleteMany({});
-        await Material.deleteMany({});
+        // await Category.deleteMany({});
 
+        await RecycleCenter.deleteMany({});
+
+        await RecycleCenter.create(recycleCenterSeeds);
 
         // await Category.create(categoryseeds);
         // await Material.create(materialseeds);
@@ -17,7 +19,7 @@ db.once('open', async () => {
         process.exit(1);
     }
 
-    console.log('Categories and Materials Deleted');
+    console.log('Recycle Centers Seeded!');
     process.exit(0);
 });
 

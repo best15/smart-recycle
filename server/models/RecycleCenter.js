@@ -14,13 +14,24 @@ const recyclecenterschema = new Schema({
         unique: true,
         trim: true,
     },
+    lattitude: {
+        type: Number,
+        required: true,
+        unique: true,
+        trim: true,
 
-    materials: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Material'
-        },
-    ]
+    },
+    longitude: {
+        type: Number,
+        required: true,
+        unique: true,
+        trim: true,
+    },
+    recycling_materials: {
+        type: Array,
+        required: true,
+
+    }
 
 });
 
