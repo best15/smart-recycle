@@ -1,6 +1,6 @@
 import React from 'react';
 import "../../assets/styles/Header.css"
-
+import { Link } from 'react-router-dom';
 import Auth from '../../utils/auth';
 
 import { Container, Menu, Button } from 'semantic-ui-react'
@@ -17,11 +17,12 @@ const Header = () => {
             <Menu className="header" fixed='top' inverted >
 
                 <Container>
-
-                    <Menu.Item as='a' header>
-                        {/* <Image size='mini' src='/logo.png' style={{ marginRight: '1.5em' }} /> */}
-                        Smart Recycle
-                    </Menu.Item>
+                    <Link to="/">
+                        <Menu.Item header>
+                            <i className="recycle-icon fa fa-recycle" aria-hidden="true" />
+                            Smart Recycle
+                        </Menu.Item>
+                    </Link>
                 </Container>
 
                 {Auth.loggedIn() ? (

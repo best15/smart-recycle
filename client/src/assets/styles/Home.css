@@ -1,0 +1,54 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  min-height: 90vh;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.results {
+  display: flex;
+  flex-direction: column;
+  min-height: 90vh;
+  justify-content: flex-start;
+  align-items: center;
+}
+.page-header {
+  text-align: center;
+  color: teal;
+}
+
+.category {
+  color: rgb(93, 104, 104);
+  text-align: center;
+  font-size: large;
+  font-weight: bold;
+  background: paleturquoise;
+  border: white solid 1px;
+}
+
+.selected {
+  background-color: teal;
+  color: whitesmoke;
+}
+
+.category:hover {
+  background-color: teal;
+  color: whitesmoke;
+  cursor: pointer;
+}
+.items {
+  color: teal;
+  font-size: larger;
+  font-weight: bold;
+  text-align: center;
+  padding: 0.5%;
+}
+
+.items:hover {
+  background: rgb(223, 220, 220);
+  cursor: pointer;
+}
+
+.back {
+  margin-top: 2%;
+}

@@ -5,6 +5,13 @@
 .header {
   background-color: teal !important;
 }
+.recycle-icon {
+  margin-right: 5px;
+}
+
+.ui.menu.fixed {
+  position: relative !important;
+}
 
 .ui.inverted.menu .item {
   font-size: xx-large;

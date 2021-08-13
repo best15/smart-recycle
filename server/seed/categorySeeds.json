@@ -1,0 +1,83 @@
+[
+  {
+    "categoryname": "Metal",
+    "materialnames": [
+      "Aerosol Can",
+      "Almuinuim Can",
+      "Gas Cylinders",
+      "Metals",
+      "Steel Cans"
+    ]
+  },
+  {
+    "categoryname": "Hazardous",
+    "materialnames": [
+      "Asbestos",
+      "Chemicals",
+      "Chemical Drum",
+      "Outdated Medicines"
+    ]
+  },
+  {
+    "categoryname": "Automotive",
+    "materialnames": [
+      "Batteries",
+      "Car Parts",
+      "Car Batteries",
+      "Motor Oil",
+      "Tyres"
+    ]
+  },
+  {
+    "categoryname": "Paper",
+    "materialnames": ["Cardboard", "Office paper", "Phonebooks"]
+  },
+  {
+    "categoryname": "Household",
+    "materialnames": [
+      "Clothing/Textiles",
+      "Cork",
+      "Food Scrape",
+      "Furniture",
+      "Eyeglasses",
+      "Mattresse",
+      "Cooking oil"
+    ]
+  },
+  {
+    "categoryname": "Electronics",
+    "materialnames": [
+      "Computer Accessories",
+      "E-Readers",
+      "Electrical appliances",
+      "Headphones",
+      "Mobile phones",
+      "Printer cartridges",
+      "Mobile phones",
+      "TV",
+      "White goods",
+      "X-ray films"
+    ]
+  },
+  {
+    "categoryname": "Construction",
+    "materialnames": ["Construction materials", "Wood", "Paint"]
+  },
+  {
+    "categoryname": "Organic Waste",
+    "materialnames": ["Grass clippings"]
+  },
+  {
+    "categoryname": "Glass",
+    "materialnames": ["Glass bottle and Jars", "Glasses"]
+  },
+  {
+    "categoryname": "Plastics",
+    "materialnames": [
+      "Plastics Bags",
+      "Plastic Bottles",
+      "Polystyrene",
+      "Softplastic"
+    ]
+  }
+]

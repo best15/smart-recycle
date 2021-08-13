@@ -1,0 +1,15 @@
+[
+  {
+    "name": "Recycling Centre Balcatta",
+    "address": "238 Balcatta Rd, Balcatta WA 6021",
+    "lattitude": -31.8645338,
+    "longitude": 115.8192721,
+    "recycling_materials": [
+      "Bicycles",
+      "Almuinuim Can",
+      "Gas Cylinders",
+      "Metals",
+      "Steel Cans"
+    ]
+  }
+]
