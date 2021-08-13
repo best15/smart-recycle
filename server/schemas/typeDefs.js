@@ -38,6 +38,7 @@ const typeDefs = gql`
     user(username: String!): User
     materials: [Material]
     recycleCenters: [RecycleCenter]
+    materialRecycleCenters(recycling_materials: String!): [RecycleCenter]
     categories: [MaterialCategory]
     
   }

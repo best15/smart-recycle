@@ -23,6 +23,9 @@ const resolvers = {
     },
     recycleCenters: async () => {
       return RecycleCenter.find({});
+    },
+    materialRecycleCenters: async (parent, { recycling_materials }) => {
+      return RecycleCenter.find({ recycling_materials });
     }
   },
 

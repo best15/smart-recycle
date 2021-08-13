@@ -6,7 +6,7 @@ import distanceCalculator from "../utils/distance"
 
 import "../assets/styles/Home.css";
 
-import { QUERY_CATEGORIES, QUERY_MATERIALS, QUERY_CATEGORIES_AND_MATERIALS } from '../utils/queries';
+import { QUERY_CATEGORIES, QUERY_MATERIALS, QUERY_MATERIAL_RECYCLING_CENTRES } from '../utils/queries';
 
 
 
@@ -52,13 +52,15 @@ const Home = () => {
     const [selectedViewState, setSelectedViewState] = useState("search");
     const [selectedCategoryName, setSelectedCategory] = useState("Metal");
     const [selectedSearchMaterial, setSelectedSearchMaterial] = useState("");
-    const [searchlocation, setSearchLocation] = useState("");
+    const [searchLocation, setSearchLocation] = useState("");
 
+    //back to landing page
     const backtoSearch = async (event) => {
-
+        setSelectedSearchMaterial("");
         setSelectedViewState("search");
 
     }
+
 
     const handleChangeSearchMaterials = async (event) => {
         setSelectedSearchMaterial(event.target.value);
@@ -76,23 +78,31 @@ const Home = () => {
     }
 
     const onClickSearch = async (event) => {
-        console.log(distanceCalculator(-31.93452, 115.8859545, -31.9106372, 115.8251195));
+        console.log(selectedSearchMaterial);
 
-        // Get search locations
-        // try {
-        //     const response = await axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
-        //         params: {
-        //             address: searchlocation,
-        //             key: process.env.APP_ID
-        //         }
-        //     }).then(function (response) {
-        //         console.log(response);
-        //         console.log(response.data.results[0].formatted_address, response.data.results[0].geometry.location);
-        //     })
-        // } catch (error) {
-        //     console.error(error);
-        // }
+        //Get Recycle centres for selected material
+        // const { loading, data } = useQuery(QUERY_MATERIAL_RECYCLING_CENTRES, {
+        //     variables: { selectedSearchMaterial }
 
+        // });
+        // console.log(data)
+
+
+
+
+        // console.log(distanceCalculator(-31.93452, 115.8859545, -31.9106372, 115.8251195));
+
+        // Get search locations and coordinates
+        try {
+            const response = await axios.get(`/api/location/${searchLocation}`)
+
+
+            console.log(response);
+            console.log(response.data.results[0].formatted_address, response.data.results[0].geometry.location);
+
+        } catch (error) {
+            console.error(error);
+        }
 
         setSelectedViewState("results");
     }
@@ -116,7 +126,7 @@ const Home = () => {
                     <div className="four wide column">
                         <div className="ui search">
                             <div className="ui large fluid icon input">
-                                <input className="searchlocation prompt" value={searchlocation} onChange={handleChangeSearchLocation} type="text" placeholder="Location" />
+                                <input className="searchlocation prompt" value={searchLocation} onChange={handleChangeSearchLocation} type="text" placeholder="Location" />
                                 <i className="search icon" />
                             </div>
                             <div className="results"></div>

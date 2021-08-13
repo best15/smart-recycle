@@ -29,6 +29,19 @@ query materials{
 }
 `;
 
+export const QUERY_MATERIAL_RECYCLING_CENTRES = gql`
+query materialRecycleCentres($recycling_materials: String!) {
+  materialRecycleCenters(recycling_materials: $recycling_materials){
+    _id
+    name
+    address
+    lattitude
+    longitude
+   
+  }
+}
+`;
+
 export const QUERY_CATEGORIES_AND_MATERIALS = gql`
 query getcategoriesandmaterials{
   categories {
