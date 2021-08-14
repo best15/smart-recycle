@@ -52,3 +52,27 @@
 .back {
   margin-top: 2%;
 }
+
+.centre {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center;
+  color: rgb(39, 38, 38);
+  background: paleturquoise;
+  border: white solid 1px;
+}
+
+.name {
+  text-align: center;
+  font-size: large;
+  font-weight: bold;
+}
+
+.address {
+  text-align: center;
+  font-weight: bold;
+}
+
+.search-header {
+  color: rgb(45, 172, 45);
+}

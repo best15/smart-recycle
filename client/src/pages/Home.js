@@ -78,7 +78,7 @@ const Home = () => {
     }
 
     const onClickSearch = async (event) => {
-        console.log(selectedSearchMaterial);
+
 
         //Get Recycle centres for selected material
         // const { loading, data } = useQuery(QUERY_MATERIAL_RECYCLING_CENTRES, {
@@ -189,16 +189,36 @@ const Home = () => {
                     </div>
                     <div className="results">
 
+                        {selectedSearchMaterial ? (<h2 className="search-header">Recycle Centres For Waste Material {selectedSearchMaterial}</h2>) : (<h2 className="search-header">Recycle Centres Nearby</h2>)}
 
-                        <h1>Recycle Centres Nearby</h1>
 
-                        <div className="ui one column grid">
-                            <div className="row">
-                                center
-                            </div>
-                            {/* <a src='https://www.google.com/maps/search/?api=1&query=optus+stadium' className="row">
+                        <div className=" ui  two column centered grid container">
+                            <div className="centre  column">
+                                <div className="info">
+                                    <div className="name">Balcatta Recycling Centre</div>
+                                    <div className="address"><i className="fas fa-map-marker-alt"></i>
+                                        Address</div>
+                                </div>
+                                <button className="direction big ui green button">Direction
+                                    {/* <a src='https://www.google.com/maps/search/?api=1&query=optus+stadium' className="row">
                                 Get Direction
                             </a> */}
+                                </button>
+                            </div>
+                        </div>
+                        <div className=" ui  two column centered grid container">
+                            <div className="centre  column">
+                                <div className="info">
+                                    <div className="name">City of South Perth Recycling Centre</div>
+                                    <div className="address"><i className="fas fa-map-marker-alt"></i>
+                                        Address</div>
+                                </div>
+                                <button className="direction big ui green button">Direction
+                                    {/* <a src='https://www.google.com/maps/search/?api=1&query=optus+stadium' className="row">
+                                Get Direction
+                            </a> */}
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>

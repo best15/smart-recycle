@@ -32,6 +32,10 @@ const resolvers = {
   Mutation: {
 
     createDefaultCategory: async () => {
+
+      await Category.deleteMany({});
+
+
       let newCategory;
       let newMaterial;
 
