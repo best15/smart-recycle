@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react';
 
 import axios from 'axios';
-import distanceCalculator from "../utils/distance"
+// import distanceCalculator from "../utils/distance"
 import Search from '../components/search';
 import Result from '../components/result';
 
@@ -23,10 +23,9 @@ const Home = () => {
     const [selectedSearchMaterial, setSelectedSearchMaterial] = useState("");
     const [searchLocation, setSearchLocation] = useState("");
     const [filteredList, setFilteredList] = useState([]);
+    const [selectedLatLon, setSelectedLatLon] = useState([]);
 
-    // console.log(materials)
     const filteredMaterialList = () => {
-        console.log('only work onchange')
         let allMaterials = [];
 
         if (!loading) {
@@ -55,6 +54,11 @@ const Home = () => {
 
     const handleChangeSearchLocation = (event) => {
         setSearchLocation(event.target.value);
+        handleGooglePlacesAPI(event.target.value)
+    }
+
+    const handleGooglePlacesAPI = (place) => {
+
     }
 
     const selectCategory = (event) => {
@@ -71,17 +75,17 @@ const Home = () => {
         if (searchLocation) {
             try {
                 const response = await axios.get(`/api/location/${searchLocation}`)
-
-
-                console.log(response);
-                console.log(response.data.results[0].formatted_address, response.data.results[0].geometry.location);
-
+                setSelectedLatLon(response.data.results[0].geometry.location);
             } catch (error) {
                 console.error(error);
             }
         }
 
         setSelectedViewState("results");
+    }
+
+    const handleAddressChange = (address) => {
+        setSearchLocation(address)
     }
 
 
@@ -94,7 +98,7 @@ const Home = () => {
     if (selectedViewState === "search") {
         return (<Search
             searchLocation={searchLocation}
-            handleChangeSearchLocation={handleChangeSearchLocation}
+            handleAddressChange={handleAddressChange}
             handleChangeSearchMaterials={handleChangeSearchMaterials}
             selectedSearchMaterial={selectedSearchMaterial}
             onClickSearch={onClickSearch}
@@ -107,7 +111,7 @@ const Home = () => {
 
     }
     else if (selectedViewState === "results") {
-        return (<Result selectedSearchMaterial={selectedSearchMaterial} backtoSearch={backtoSearch} />)
+        return (<Result selectedSearchMaterial={selectedSearchMaterial} backtoSearch={backtoSearch} selectedLatLon={selectedLatLon} />)
 
     }
     else {

@@ -38,7 +38,6 @@ query materialRecycleCenters($recycling_materials: String!) {
     address
     lattitude
     longitude
-   
   }
 }
 `;

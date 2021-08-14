@@ -1,6 +1,7 @@
-import React, { Fragment, useState } from 'react';
+import React from 'react';
 import { useQuery } from '@apollo/client';
 import SearchAutoComplete from './SearchAutoComplete'
+import LocationAutoComplete from './LocationAutoComplete'
 
 
 
@@ -9,7 +10,7 @@ import { QUERY_CATEGORIES, } from '../utils/queries';
 
 const Search = ({
     searchLocation,
-    handleChangeSearchLocation,
+    handleAddressChange,
     handleChangeSearchMaterials,
     selectedSearchMaterial,
     onClickSearch,
@@ -18,26 +19,8 @@ const Search = ({
     onClickMaterials,
     filteredList
 }) => {
-
-
     const { loading, data } = useQuery(QUERY_CATEGORIES);
     const categories = data?.categories || [];
-
-
-    //Get all materials
-    function getMaterials() {
-        let materials = [];
-        categories.map((category) => {
-            category.materials.map((material) => {
-                materials.push(material.materialname);
-            })
-        })
-        return materials;
-    }
-
-    const materials = getMaterials();
-
-    const [allMaterials, setAllMaterials] = useState("");
 
     return (
 
@@ -48,12 +31,7 @@ const Search = ({
             </div>
             <div className=" ui grid container">
                 <div className="four wide column">
-                    <div className="ui search">
-                        <div className="ui large fluid icon input">
-                            <input className="searchlocation prompt" value={searchLocation} onChange={handleChangeSearchLocation} type="text" placeholder="Location" />
-                            <i className="search icon" />
-                        </div>
-                    </div>
+                    <LocationAutoComplete address={searchLocation} onChange={handleAddressChange} />
                 </div>
                 <div className="eight wide column">
                     <div className="ui searchwrap search">
@@ -83,12 +61,9 @@ const Search = ({
                 <div className="ui five column grid container">
                     <ul className="row itemlist">
 
-                        {(categories.map((category) => (category.categoryname === selectedCategoryName) ? (
+                        {(categories.map((category) => (category.categoryname === selectedCategoryName) && (
                             category.materials.map((material) => <li key={material._id} className="items column" onClick={onClickMaterials}>{material.materialname}</li>))
-                            : (<> </>)
                         ))}
-
-
                     </ul>
 
                 </div>
