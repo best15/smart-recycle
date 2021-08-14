@@ -23,12 +23,22 @@ const resolvers = {
     },
     recycleCenters: async () => {
       return RecycleCenter.find({});
+    },
+    materialRecycleCenters: async (parent, { recycling_materials }) => {
+      console.log(recycling_materials);
+      const recycleCenters = RecycleCenter.find({ recycling_materials });
+
+      return recycleCenters;
     }
   },
 
   Mutation: {
 
     createDefaultCategory: async () => {
+
+      await Category.deleteMany({});
+
+
       let newCategory;
       let newMaterial;
 
