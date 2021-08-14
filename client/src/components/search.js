@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { useQuery } from '@apollo/client';
+import SearchAutoComplete from './SearchAutoComplete'
 
 
 
@@ -14,7 +15,8 @@ const Search = ({
     onClickSearch,
     selectedCategoryName,
     selectCategory,
-    onClickMaterials
+    onClickMaterials,
+    filteredList
 }) => {
 
 
@@ -37,9 +39,6 @@ const Search = ({
 
     const [allMaterials, setAllMaterials] = useState("");
 
-
-
-
     return (
 
         <div className="home">
@@ -54,17 +53,15 @@ const Search = ({
                             <input className="searchlocation prompt" value={searchLocation} onChange={handleChangeSearchLocation} type="text" placeholder="Location" />
                             <i className="search icon" />
                         </div>
-                        <div className="results"></div>
                     </div>
                 </div>
                 <div className="eight wide column">
-                    <div className="ui search">
+                    <div className="ui searchwrap search">
                         <div className="ui large fluid icon input">
                             <input className="searchmaterial prompt" type="text" placeholder="Search materials like plastic,glass..." value={selectedSearchMaterial} onChange={handleChangeSearchMaterials} />
                             <i className="search icon" />
                         </div>
-                        <div className="results"></div>
-
+                        <SearchAutoComplete filteredList={filteredList} handleMaterialClick={onClickMaterials} />
                     </div>
                 </div>
                 <div className="four wide column">

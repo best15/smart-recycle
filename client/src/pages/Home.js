@@ -5,6 +5,9 @@ import distanceCalculator from "../utils/distance"
 import Search from '../components/search';
 import Result from '../components/result';
 
+import { useQuery } from '@apollo/client'
+import { QUERY_MATERIALS } from '../utils/queries';
+
 import "../assets/styles/Home.css";
 
 
@@ -12,56 +15,52 @@ import "../assets/styles/Home.css";
 
 
 const Home = () => {
-
-    // const { loading1, data1 } = useQuery(QUERY_CATEGORIES_AND_MATERIALS);
-    // console.log(data1);
-    // const categories1 = data1?.categories || [];
-
-    // const [cat, mat] = useQuery([QUERY_CATEGORIES, QUERY_MATERIALS]);
-    // const { loading, data } = cat;
-    // const categories = data?.cat || [];
-
-    // const queryMultiple = () => {
-    //     const res1 = useQuery(QUERY_CATEGORIES);
-    //     const res2 = useQuery(QUERY_MATERIALS);
-    //     return [res1, res2];
-    // }
-
-    // const [
-    //     { loading: loading1, data: data1 },
-    //     { loading: loading2, data: data2 }
-    // ] = queryMultiple()
-    // const categories = data1?.categories || [];
-
+    const { loading, data } = useQuery(QUERY_MATERIALS);
+    const materials = data?.materials || [];
 
     const [selectedViewState, setSelectedViewState] = useState("search");
     const [selectedCategoryName, setSelectedCategory] = useState("Metal");
     const [selectedSearchMaterial, setSelectedSearchMaterial] = useState("");
     const [searchLocation, setSearchLocation] = useState("");
+    const [filteredList, setFilteredList] = useState([]);
 
+    // console.log(materials)
+    const filteredMaterialList = () => {
+        console.log('only work onchange')
+        let allMaterials = [];
+
+        if (!loading) {
+            materials.forEach(element => {
+                allMaterials.push(element.materialname)
+            });
+            const regex = new RegExp(`^${selectedSearchMaterial}`, 'i');
+            setFilteredList(allMaterials.sort().filter(i => regex.test(i)))
+        }
+
+        return filteredList
+    }
 
 
     //back to landing page
     const backtoSearch = async (event) => {
         setSelectedSearchMaterial("");
         setSelectedViewState("search");
+    }
+
+    const handleChangeSearchMaterials = (event) => {
+        setSelectedSearchMaterial(event.target.value)
+        filteredMaterialList()
 
     }
 
-
-    const handleChangeSearchMaterials = async (event) => {
-        setSelectedSearchMaterial(event.target.value);
-    }
-
-    const handleChangeSearchLocation = async (event) => {
+    const handleChangeSearchLocation = (event) => {
         setSearchLocation(event.target.value);
     }
 
-    const selectCategory = async (event) => {
+    const selectCategory = (event) => {
         event.preventDefault();
         const selectedCategory = event.target;
         setSelectedCategory(selectedCategory.innerText);
-
     }
 
     const onClickSearch = async (event) => {
@@ -86,9 +85,9 @@ const Home = () => {
     }
 
 
-    const onClickMaterials = async (event) => {
-
+    const onClickMaterials = (event) => {
         setSelectedSearchMaterial(event.target.innerText);
+        setFilteredList([])
 
     }
 
@@ -102,6 +101,7 @@ const Home = () => {
             selectedCategoryName={selectedCategoryName}
             selectCategory={selectCategory}
             onClickMaterials={onClickMaterials}
+            filteredList={filteredList}
         />)
 
 
