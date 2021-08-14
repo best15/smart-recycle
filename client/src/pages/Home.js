@@ -1,12 +1,13 @@
 import React, { Fragment, useState } from 'react';
-import { useQuery } from '@apollo/client';
+
 import axios from 'axios';
 import distanceCalculator from "../utils/distance"
-// const axios = require('axios').default;
+import Search from '../components/search';
+import Result from '../components/result';
 
 import "../assets/styles/Home.css";
 
-import { QUERY_CATEGORIES, QUERY_MATERIALS, QUERY_MATERIAL_RECYCLING_CENTRES } from '../utils/queries';
+
 
 
 
@@ -32,27 +33,13 @@ const Home = () => {
     // ] = queryMultiple()
     // const categories = data1?.categories || [];
 
-    const { loading, data } = useQuery(QUERY_CATEGORIES);
-    const categories = data?.categories || [];
 
-    //Get all materials
-    function getMaterials() {
-        let materials = [];
-        categories.map((category) => {
-            category.materials.map((material) => {
-                materials.push(material.materialname);
-            })
-        })
-        return materials;
-    }
-
-    const materials = getMaterials();
-
-    const [allMaterials, setAllMaterials] = useState(materials);
     const [selectedViewState, setSelectedViewState] = useState("search");
     const [selectedCategoryName, setSelectedCategory] = useState("Metal");
     const [selectedSearchMaterial, setSelectedSearchMaterial] = useState("");
     const [searchLocation, setSearchLocation] = useState("");
+
+
 
     //back to landing page
     const backtoSearch = async (event) => {
@@ -79,29 +66,20 @@ const Home = () => {
 
     const onClickSearch = async (event) => {
 
-
-        //Get Recycle centres for selected material
-        // const { loading, data } = useQuery(QUERY_MATERIAL_RECYCLING_CENTRES, {
-        //     variables: { selectedSearchMaterial }
-
-        // });
-        // console.log(data)
-
-
-
-
         // console.log(distanceCalculator(-31.93452, 115.8859545, -31.9106372, 115.8251195));
 
         // Get search locations and coordinates
-        try {
-            const response = await axios.get(`/api/location/${searchLocation}`)
+        if (searchLocation) {
+            try {
+                const response = await axios.get(`/api/location/${searchLocation}`)
 
 
-            console.log(response);
-            console.log(response.data.results[0].formatted_address, response.data.results[0].geometry.location);
+                console.log(response);
+                console.log(response.data.results[0].formatted_address, response.data.results[0].geometry.location);
 
-        } catch (error) {
-            console.error(error);
+            } catch (error) {
+                console.error(error);
+            }
         }
 
         setSelectedViewState("results");
@@ -115,115 +93,22 @@ const Home = () => {
     }
 
     if (selectedViewState === "search") {
-        return (
+        return (<Search
+            searchLocation={searchLocation}
+            handleChangeSearchLocation={handleChangeSearchLocation}
+            handleChangeSearchMaterials={handleChangeSearchMaterials}
+            selectedSearchMaterial={selectedSearchMaterial}
+            onClickSearch={onClickSearch}
+            selectedCategoryName={selectedCategoryName}
+            selectCategory={selectCategory}
+            onClickMaterials={onClickMaterials}
+        />)
 
-            <div className="home">
-
-                <div className="page-header ui container">
-                    <h2>SEARCH FIND AND RECYCLE </h2>
-                </div>
-                <div className=" ui grid container">
-                    <div className="four wide column">
-                        <div className="ui search">
-                            <div className="ui large fluid icon input">
-                                <input className="searchlocation prompt" value={searchLocation} onChange={handleChangeSearchLocation} type="text" placeholder="Location" />
-                                <i className="search icon" />
-                            </div>
-                            <div className="results"></div>
-                        </div>
-                    </div>
-                    <div className="eight wide column">
-                        <div className="ui search">
-                            <div className="ui large fluid icon input">
-                                <input className="searchmaterial prompt" type="text" placeholder="Search materials like plastic,glass..." value={selectedSearchMaterial} onChange={handleChangeSearchMaterials} />
-                                <i className="search icon" />
-                            </div>
-                            {(categories.map((category) =>
-                                <div className="results">{category.categoryname}</div>))}
-                        </div>
-                    </div>
-                    <div className="four wide column">
-                        <button className="ui large fluid teal button" onClick={onClickSearch}>
-                            Search
-                        </button>
-                    </div>
-                </div>
-                <div className="materials">
-                    <div className="category-section ui five column grid container">
-                        {loading ? (<h3>Loading....</h3>) :
-                            (categories.map((category) => (
-                                <div key={category._id}
-                                    className={selectedCategoryName === category.categoryname ? "category column selected" : "category column"}
-                                    onClick={selectCategory}>{category.categoryname}</div>
-                            )))}
-
-                    </div>
-                    <div className="ui five column grid container">
-                        <ul className="row itemlist">
-
-                            {(categories.map((category) => (category.categoryname === selectedCategoryName) ? (
-                                category.materials.map((material) => <li key={material.materialname} className="items column" onClick={onClickMaterials}>{material.materialname}</li>))
-                                : (<> </>)
-                            ))}
-
-
-                        </ul>
-
-                    </div>
-                </div>
-            </div>
-        )
 
     }
     else if (selectedViewState === "results") {
+        return (<Result selectedSearchMaterial={selectedSearchMaterial} backtoSearch={backtoSearch} />)
 
-        return (
-            <Fragment>
-                <div className="container">
-                    <div className="back">
-
-                        <button className="ui  teal button" onClick={backtoSearch}>
-                            <i className="arrow alternate circle left outline icon large fluid" onClick={backtoSearch} />
-                            Back to Search
-                        </button>
-                    </div>
-                    <div className="results">
-
-                        {selectedSearchMaterial ? (<h1 className="search-header">Recycle Centres Nearby <p className="sub-header">Material: {selectedSearchMaterial}</p></h1>) : (<h1 className="search-header">Recycle Centres Nearby</h1>)}
-
-
-                        <div className=" ui  two column centered grid container">
-                            <div className="centre  column">
-                                <div className="info">
-                                    <div className="name">Balcatta Recycling Centre</div>
-                                    <div className="address"><i className="fas fa-map-marker-alt"></i>
-                                        Address</div>
-                                </div>
-                                <button className="direction big ui green button">Direction
-                                    {/* <a src='https://www.google.com/maps/search/?api=1&query=optus+stadium' className="row">
-                                Get Direction
-                            </a> */}
-                                </button>
-                            </div>
-                        </div>
-                        <div className=" ui  two column centered grid container">
-                            <div className="centre  column">
-                                <div className="info">
-                                    <div className="name">City of South Perth Recycling Centre</div>
-                                    <div className="address"><i className="fas fa-map-marker-alt"></i>
-                                        Address</div>
-                                </div>
-                                <button className="direction big ui green button">Direction
-                                    {/* <a src='https://www.google.com/maps/search/?api=1&query=optus+stadium' className="row">
-                                Get Direction
-                            </a> */}
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </Fragment>
-        )
     }
     else {
         return (<> </>);

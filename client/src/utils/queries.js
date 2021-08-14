@@ -15,6 +15,7 @@ export const QUERY_CATEGORIES = gql`
       _id
       categoryname
       materials{
+        _id
         materialname
       }
     }
@@ -30,7 +31,7 @@ query materials{
 `;
 
 export const QUERY_MATERIAL_RECYCLING_CENTRES = gql`
-query materialRecycleCentres($recycling_materials: String!) {
+query materialRecycleCenters($recycling_materials: String!) {
   materialRecycleCenters(recycling_materials: $recycling_materials){
     _id
     name

@@ -6,10 +6,85 @@
     "longitude": 115.8192721,
     "recycling_materials": [
       "Bicycles",
-      "Almuinuim Can",
+      "Aerosol Can",
+      "Computer Accessories",
+      "Construction materials",
+      "Paint",
+      "Car Batteries",
+      "Batteries",
+      "Electrical appliances",
+      "TV",
+      "Tyres",
+      "X-rays films",
+      "Mattresse",
       "Gas Cylinders",
-      "Metals",
-      "Steel Cans"
+      "Polystyrene"
+    ]
+  },
+  {
+    "name": "West Metro Recycling Centre",
+    "address": "60 Lemnos Street, Shenton Park",
+    "lattitude": -31.9576101,
+    "longitude": 115.7921982,
+    "recycling_materials": [
+      "Car Batteries",
+      "Gas Cylinders",
+      "Batteries",
+      "Scrap metal",
+      "X-rays films",
+      "Electrical appliances",
+      "Asbestos",
+      "Computer Accessories",
+      "Bicycles",
+      "TV",
+      "Mattresse",
+      "White goods",
+      "Mobile phones",
+      "Paint",
+      "Construction materials",
+      "Grass clippings",
+      "Motor Oil"
+    ]
+  },
+  {
+    "name": "City of South Perth Recycling Centre",
+    "address": "Cnr Hayman Road and Thelma Street, Como, WA 6151",
+    "lattitude": -31.9975123,
+    "longitude": 115.8822404,
+    "recycling_materials": [
+      "Printer cartridges",
+      "Car Batteries",
+      "Batteries",
+      "Computer Accessories",
+      "Batteries",
+      "TV",
+      "Electrical appliances",
+      "Bicycles"
+    ]
+  },
+  {
+    "name": "City of Fremantle Recycling Centre",
+    "address": "19a Montreal Street, Fremantle WA 6160",
+    "lattitude": -32.0541446,
+    "longitude": 115.7657075,
+    "recycling_materials": [
+      "Car Batteries",
+      "Gas Cylinders",
+      "Batteries",
+      "Scrap metal",
+      "X-rays films",
+      "Electrical appliances",
+      "Asbestos",
+      "Computer Accessories",
+      "Bicycles",
+      "TV",
+      "Mattresse",
+      "White goods",
+      "Mobile phones",
+      "Paint",
+      "Construction materials",
+      "Grass clippings",
+      "Motor Oil"
     ]
   }
 ]
