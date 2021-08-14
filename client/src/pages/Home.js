@@ -189,7 +189,7 @@ const Home = () => {
                     </div>
                     <div className="results">
 
-                        {selectedSearchMaterial ? (<h2 className="search-header">Recycle Centres For Waste Material {selectedSearchMaterial}</h2>) : (<h2 className="search-header">Recycle Centres Nearby</h2>)}
+                        {selectedSearchMaterial ? (<h1 className="search-header">Recycle Centres Nearby <p className="sub-header">Material: {selectedSearchMaterial}</p></h1>) : (<h1 className="search-header">Recycle Centres Nearby</h1>)}
 
 
                         <div className=" ui  two column centered grid container">

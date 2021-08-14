@@ -69,10 +69,24 @@
 }
 
 .address {
-  text-align: center;
+  /* text-align: center; */
   font-weight: bold;
 }
 
 .search-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   color: rgb(45, 172, 45);
+  margin-bottom: 20px;
+}
+
+.sub-header {
+  background: rgb(45, 172, 45);
+  color: white;
+  font-size: large;
+  justify-content: center;
+  align-items: center;
+  padding: 4px;
+  border-radius: 25px;
 }
