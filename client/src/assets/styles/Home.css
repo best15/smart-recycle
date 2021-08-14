@@ -68,9 +68,10 @@
   font-weight: bold;
 }
 
-.address {
-  /* text-align: center; */
-  font-weight: bold;
+.direction {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
 }
 
 .search-header {

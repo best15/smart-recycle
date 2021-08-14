@@ -14,8 +14,6 @@ const Result = ({ selectedSearchMaterial, backtoSearch, selectedLatLon }) => {
     });
     const materialRecycleCenters = data?.materialRecycleCenters || [];
 
-    console.log(selectedLatLon)
-
     return (
         <Fragment>
             <div className="container">
@@ -36,24 +34,24 @@ const Result = ({ selectedSearchMaterial, backtoSearch, selectedLatLon }) => {
                     {loading ? (<h3>Loading....</h3>) :
                         materialRecycleCenters.map((recycle_center) => {
                             let distance = getDistanceFromLatLonInKm(selectedLatLon.lat, selectedLatLon.lng, recycle_center.lattitude, recycle_center.longitude)
-                            console.log('Distance', distance)
+                            let url = "https://www.google.com/maps/search/?api=1&query=" + recycle_center.name;
                             return (
                                 <div key={recycle_center._id} className="ui  two column centered grid container">
                                     <div className="centre  column">
                                         <div className="info">
                                             <div className="name">{recycle_center.name.trim()}</div>
-                                            <div className="address"><i className="fas fa-map-marker-alt"></i>
-                                                {recycle_center.address}</div>
-                                            <div> Lat: {recycle_center.lattitude}</div>
-                                            <div> Lon: {recycle_center.longitude}</div>
+                                            <small className="address"><i className="fas fa-map-marker-alt"></i>
+                                                {recycle_center.address}</small>
+                                            {/* <div> Lat: {recycle_center.lattitude}</div>
+                                            <div> Lon: {recycle_center.longitude}</div> */}
                                         </div>
-                                        <div>
-                                            <button className="direction big ui green button">Direction
-                                                {/* <a src='https://www.google.com/maps/search/?api=1&query=optus+stadium' className="row">
-                                Get Direction
-                            </a> */}
-                                            </button>
-                                            <small>Distance: {Math.round(distance)}kms</small>
+                                        <div className="direction">
+                                            <strong>Distance: {Math.round(distance)}kms</strong>
+                                            <a href={url} target="_blank" className="row">
+                                                <button className=" big ui green button">Direction</button>
+                                            </a>
+
+
                                         </div>
                                     </div>
                                 </div>
@@ -63,7 +61,7 @@ const Result = ({ selectedSearchMaterial, backtoSearch, selectedLatLon }) => {
 
                 </div>
             </div>
-        </Fragment>
+        </Fragment >
     )
 
 }
