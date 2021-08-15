@@ -30,7 +30,7 @@ const Search = ({
         <div className="home">
 
             <div className="page-header ui container">
-                <h2>SEARCH FIND AND RECYCLE </h2>
+                <h1>SEARCH, FIND AND RECYCLE </h1>
             </div>
             {errorMessage && (<h3 className="errorMessage ">{errorMessage}</h3>)}
             <div className=" ui grid container">

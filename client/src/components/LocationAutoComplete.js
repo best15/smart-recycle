@@ -47,7 +47,7 @@ const LocationAutoComplete = ({ address, onChange }) => {
                     value={address}
                     onSelect={handleSelect}
                     searchOptions={searchOptions}
-                    shouldFetchSuggestions={address.length > 2}
+                    shouldFetchSuggestions={address.length > 0}
                 >
                     {({ getInputProps, suggestions, getSuggestionItemProps }) => {
                         return (

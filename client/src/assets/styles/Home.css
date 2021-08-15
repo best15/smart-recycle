@@ -78,8 +78,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: rgb(45, 172, 45);
+  color: teal;
   margin-bottom: 20px;
+}
+.result-location {
+  font-size: large;
 }
 
 .result-sub-header {

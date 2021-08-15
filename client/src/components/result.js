@@ -5,8 +5,8 @@ import { QUERY_MATERIAL_RECYCLING_CENTRES, } from '../utils/queries';
 
 import getDistanceFromLatLonInKm from '../utils/distance'
 
-const Result = ({ selectedSearchMaterial, backtoSearch, selectedLatLon }) => {
-
+const Result = ({ selectedSearchMaterial, backtoSearch, selectedLatLon, searchLocation }) => {
+    console.log(searchLocation);
     const recycling_materials = selectedSearchMaterial;
 
     const { loading, data } = useQuery(QUERY_MATERIAL_RECYCLING_CENTRES, {
@@ -70,7 +70,7 @@ const Result = ({ selectedSearchMaterial, backtoSearch, selectedLatLon }) => {
                     </div>
                     <div className="results">
 
-                        {selectedSearchMaterial ? (<h1 className="result-header">Recycle Centres Nearby <p className="result-sub-header">Material: {selectedSearchMaterial}</p></h1>) : (<h1 className="search-header">Recycle Centres Nearby</h1>)}
+                        <h1 className="result-header">Recycle Centres Nearby <p className="result-location">{searchLocation}</p> <p className="result-sub-header">For Material: {selectedSearchMaterial}</p></h1>
                         {/* <div className="ui grid">
                             <div>Incoming Lat: {selectedLatLon.lat}</div>
                             <div>Incoming Lon: {selectedLatLon.lng}</div>
@@ -90,7 +90,7 @@ const Result = ({ selectedSearchMaterial, backtoSearch, selectedLatLon }) => {
                                             <div> Lon: {recycle_center.longitude}</div> */}
                                             </div>
                                             <div className="direction">
-                                                <strong>Distance: {Math.round(recycle_center.distance)}kms</strong>
+                                                <strong>Distance: {Math.round(recycle_center.distance)}km</strong>
                                                 <a href={url} target="_blank" className="row">
                                                     <button className=" big ui green button">Direction</button>
                                                 </a>

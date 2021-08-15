@@ -57,6 +57,7 @@ const Home = () => {
     //back to landing page
     const backtoSearch = async (event) => {
         setSelectedSearchMaterial("");
+        setSearchLocation("");
         setSelectedViewState("search");
     }
 
@@ -81,7 +82,7 @@ const Home = () => {
             setErrorMessage("Please Provide valid location");
         }
         else if (selectedSearchMaterial === '') {
-            setErrorMessage("Materials name cannot be empty");
+            setErrorMessage("Please Select Materials");
         }
 
         // Get search locations and coordinates
@@ -89,12 +90,11 @@ const Home = () => {
             try {
                 const response = await axios.get(`/api/location/${searchLocation}`)
                 setSelectedLatLon(response.data.results[0].geometry.location);
-
+                setSearchLocation(response.data.results[0].formatted_address);
             } catch (error) {
                 console.error(error);
             }
             setErrorMessage("");
-            setSearchLocation("");
             setSelectedViewState("results");
         }
 
@@ -125,7 +125,10 @@ const Home = () => {
 
     }
     else if (selectedViewState === "results") {
-        return (<Result selectedSearchMaterial={selectedSearchMaterial} backtoSearch={backtoSearch} selectedLatLon={selectedLatLon} />)
+        return (<Result selectedSearchMaterial={selectedSearchMaterial}
+            backtoSearch={backtoSearch}
+            selectedLatLon={selectedLatLon}
+            searchLocation={searchLocation} />)
 
     }
     else {
