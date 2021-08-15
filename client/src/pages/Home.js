@@ -24,6 +24,8 @@ const Home = () => {
     const [searchLocation, setSearchLocation] = useState("");
     const [filteredList, setFilteredList] = useState([]);
     const [selectedLatLon, setSelectedLatLon] = useState([]);
+    const [errorMessage, setErrorMessage] = useState(null);
+
 
     const filteredMaterialList = () => {
         let allMaterials = [];
@@ -40,17 +42,24 @@ const Home = () => {
     }
 
 
+    const handleChangeSearchMaterials = (event) => {
+        setSelectedSearchMaterial(event.target.value)
+        filteredMaterialList()
+
+    }
+
+    const onClickMaterials = (event) => {
+        setSelectedSearchMaterial(event.target.innerText);
+        setFilteredList([])
+
+    }
+
     //back to landing page
     const backtoSearch = async (event) => {
         setSelectedSearchMaterial("");
         setSelectedViewState("search");
     }
 
-    const handleChangeSearchMaterials = (event) => {
-        setSelectedSearchMaterial(event.target.value)
-        filteredMaterialList()
-
-    }
 
     const handleChangeSearchLocation = (event) => {
         setSearchLocation(event.target.value);
@@ -68,20 +77,28 @@ const Home = () => {
     }
 
     const onClickSearch = async (event) => {
-
-        // console.log(distanceCalculator(-31.93452, 115.8859545, -31.9106372, 115.8251195));
+        if (searchLocation === '') {
+            setErrorMessage("Please Provide valid location");
+        }
+        else if (selectedSearchMaterial === '') {
+            setErrorMessage("Materials name cannot be empty");
+        }
 
         // Get search locations and coordinates
-        if (searchLocation) {
+        else {
             try {
                 const response = await axios.get(`/api/location/${searchLocation}`)
                 setSelectedLatLon(response.data.results[0].geometry.location);
+
             } catch (error) {
                 console.error(error);
             }
+            setErrorMessage("");
+            setSearchLocation("");
+            setSelectedViewState("results");
         }
 
-        setSelectedViewState("results");
+
     }
 
     const handleAddressChange = (address) => {
@@ -89,11 +106,7 @@ const Home = () => {
     }
 
 
-    const onClickMaterials = (event) => {
-        setSelectedSearchMaterial(event.target.innerText);
-        setFilteredList([])
 
-    }
 
     if (selectedViewState === "search") {
         return (<Search
@@ -106,6 +119,7 @@ const Home = () => {
             selectCategory={selectCategory}
             onClickMaterials={onClickMaterials}
             filteredList={filteredList}
+            errorMessage={errorMessage}
         />)
 
 

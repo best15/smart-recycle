@@ -3,7 +3,7 @@ import PlacesAutocomplete from 'react-places-autocomplete';
 import useScript from '../utils/useScript';
 
 const LocationAutoComplete = ({ address, onChange }) => {
-    const [loaded, error] = useScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyCiKqUNW10547SuGRyX5vEfkb6UgidL6Os&libraries=places');
+    const [loaded] = useScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyCiKqUNW10547SuGRyX5vEfkb6UgidL6Os&libraries=places');
     const [scriptLoaded, setScriptLoaded] = useState(false)
 
     useEffect(() => {

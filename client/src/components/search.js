@@ -17,10 +17,13 @@ const Search = ({
     selectedCategoryName,
     selectCategory,
     onClickMaterials,
-    filteredList
+    filteredList,
+    errorMessage
 }) => {
+
     const { loading, data } = useQuery(QUERY_CATEGORIES);
     const categories = data?.categories || [];
+
 
     return (
 
@@ -29,6 +32,7 @@ const Search = ({
             <div className="page-header ui container">
                 <h2>SEARCH FIND AND RECYCLE </h2>
             </div>
+            {errorMessage && (<h3 className="errorMessage ">{errorMessage}</h3>)}
             <div className=" ui grid container">
                 <div className="four wide column">
                     <LocationAutoComplete address={searchLocation} onChange={handleAddressChange} />
@@ -39,7 +43,7 @@ const Search = ({
                             <input className="searchmaterial prompt" type="text" placeholder="Search materials like plastic,glass..." value={selectedSearchMaterial} onChange={handleChangeSearchMaterials} />
                             <i className="search icon" />
                         </div>
-                        <SearchAutoComplete filteredList={filteredList} handleMaterialClick={onClickMaterials} />
+                        <SearchAutoComplete filteredList={filteredList} handleMaterialClick={onClickMaterials} selectedSearchMaterial={selectedSearchMaterial} />
                     </div>
                 </div>
                 <div className="four wide column">
@@ -48,6 +52,7 @@ const Search = ({
                     </button>
                 </div>
             </div>
+
             <div className="materials">
                 <div className="category-section ui five column grid container">
                     {loading ? (<h3>Loading....</h3>) :
