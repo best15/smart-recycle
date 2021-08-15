@@ -49,10 +49,12 @@ const Result = ({ selectedSearchMaterial, backtoSearch, selectedLatLon, searchLo
                         Back to Search
                     </button>
                 </div>
-                {loading ? (<h3>Loading....</h3>) :
-                    <h1 className="noResult-header">No Results Found For Material {selectedSearchMaterial}
-                        <p className="noResult-sub-header">**Please provide name from the list** </p>
-                    </h1>}
+                <div className="result">
+                    {loading ? (<h3>Loading....</h3>) :
+                        <h1 className="noResult-header">No Results Found For Material {selectedSearchMaterial}
+                            <p className="noResult-sub-header">**Please provide name from the list** </p>
+                        </h1>}
+                </div>
             </div>
         )
     }
@@ -68,7 +70,7 @@ const Result = ({ selectedSearchMaterial, backtoSearch, selectedLatLon, searchLo
                             Back to Search
                         </button>
                     </div>
-                    <div className="results">
+                    <div className="result">
 
                         <h1 className="result-header">Recycle Centres Nearby <p className="result-location">{searchLocation}</p> <p className="result-sub-header">For Material: {selectedSearchMaterial}</p></h1>
                         {/* <div className="ui grid">

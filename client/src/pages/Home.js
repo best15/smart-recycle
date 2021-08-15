@@ -12,8 +12,6 @@ import "../assets/styles/Home.css";
 
 
 
-
-
 const Home = () => {
     const { loading, data } = useQuery(QUERY_MATERIALS);
     const materials = data?.materials || [];
@@ -78,13 +76,22 @@ const Home = () => {
     }
 
     const onClickSearch = async (event) => {
+
+        let allMaterialName = [];
+        materials.map((material) => {
+            allMaterialName.push(material.materialname.toLowerCase());
+        })
+        const checkMaterial = allMaterialName.includes(selectedSearchMaterial.toLowerCase());
+
         if (searchLocation === '') {
-            setErrorMessage("Please Provide valid location");
+            setErrorMessage("Please Enter location");
         }
         else if (selectedSearchMaterial === '') {
             setErrorMessage("Please Select Materials");
         }
-
+        else if (!checkMaterial) {
+            setErrorMessage("Material not in the list");
+        }
         // Get search locations and coordinates
         else {
             try {
