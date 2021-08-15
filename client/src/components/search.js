@@ -47,7 +47,7 @@ const Search = ({
                     </div>
                 </div>
                 <div className="four wide column">
-                    <button className="ui large fluid teal button" onClick={onClickSearch}>
+                    <button className="ui large fluid teal white button" onClick={onClickSearch}>
                         Search
                     </button>
                 </div>

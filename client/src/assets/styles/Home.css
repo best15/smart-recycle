@@ -18,10 +18,10 @@
 }
 
 .category {
-  color: rgb(93, 104, 104);
+  /* color: rgb(93, 104, 104); */
   text-align: center;
   font-size: large;
-  font-weight: bold;
+  font-weight: 600;
   background: paleturquoise;
   border: white solid 1px;
 }
@@ -39,7 +39,7 @@
 .items {
   color: teal;
   font-size: larger;
-  font-weight: bold;
+  font-weight: 600;
   text-align: center;
   padding: 0.5%;
 }
