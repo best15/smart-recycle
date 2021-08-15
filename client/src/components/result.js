@@ -51,8 +51,8 @@ const Result = ({ selectedSearchMaterial, backtoSearch, selectedLatLon, searchLo
                 </div>
                 <div className="result">
                     {loading ? (<h3>Loading....</h3>) :
-                        <h1 className="noResult-header">No Results Found For Material {selectedSearchMaterial}
-                            <p className="noResult-sub-header">**Please provide name from the list** </p>
+                        <h1 className="noResult-header">No Results Found For
+                            <p className="noResult-sub-header">**Material {selectedSearchMaterial}** </p>
                         </h1>}
                 </div>
             </div>
