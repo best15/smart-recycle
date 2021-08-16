@@ -6,7 +6,13 @@
     "longitude": 115.8192721,
     "recycling_materials": [
       "Bicycles",
+      "Aluminium Can",
       "Aerosol Can",
+      "Grass clippings",
+      "Glass bottle and Jars",
+      "Plastic Bottles",
+      "Plastics Bags",
+      "Softplastic",
       "Computer Accessories",
       "Construction materials",
       "Paint",
@@ -18,7 +24,12 @@
       "X-rays films",
       "Mattresse",
       "Gas Cylinders",
-      "Polystyrene"
+      "Polystyrene",
+      "Cardboard",
+      "Office paper",
+      "Phonebooks",
+      "Chemicals",
+      "Chemical Drum"
     ]
   },
   {
@@ -28,8 +39,14 @@
     "longitude": 115.7921982,
     "recycling_materials": [
       "Car Batteries",
+      "Aluminium Can",
+      "Glass bottle and Jars",
+      "Cooking oil",
+      "Chemicals",
+      "Grass clippings",
       "Gas Cylinders",
       "Batteries",
+      "E-Readers",
       "Scrap metal",
       "X-rays films",
       "Electrical appliances",
@@ -43,7 +60,11 @@
       "Paint",
       "Construction materials",
       "Grass clippings",
-      "Motor Oil"
+      "Motor Oil",
+      "Plastics Bags",
+      "Plastic Bottles",
+      "Polystyrene",
+      "Softplastic"
     ]
   },
   {
@@ -69,8 +90,11 @@
     "longitude": 115.7657075,
     "recycling_materials": [
       "Car Batteries",
+      "Aluminium Can",
+      "Cooking oil",
       "Gas Cylinders",
       "Batteries",
+      "Grass clippings",
       "Scrap metal",
       "X-rays films",
       "Electrical appliances",
@@ -84,7 +108,80 @@
       "Paint",
       "Construction materials",
       "Grass clippings",
-      "Motor Oil"
+      "Motor Oil",
+      "Plastics Bags",
+      "Plastic Bottles",
+      "Polystyrene",
+      "Softplastic",
+      "Cardboard",
+      "Office paper",
+      "Phonebooks",
+      "Chemicals"
     ]
+  },
+  {
+    "name": "Red Hill Waste Management Facility",
+    "address": "1094 Toodyay Rd, Red Hill WA 6056, Australia",
+    "lattitude": -31.82916892010728,
+    "longitude": 116.1026456298927,
+    "recycling_materials": [
+      "Cardboard",
+      "Grass clippings",
+      "Aluminium Can",
+      "Glass bottle and Jars",
+      "Printer cartridges",
+      "Aerosol Can",
+      "Asbestos",
+      "Car Batteries",
+      "Car Parts",
+      "Gas Cylinders",
+      "Batteries",
+      "Electrical appliances",
+      "Computer Accessories",
+      "Mattresse",
+      "White goods",
+      "Mobile phones",
+      "Paint",
+      "Construction materials",
+      "Grass clippings",
+      "Motor Oil",
+      "Plastics Bags",
+      "Plastic Bottles",
+      "Polystyrene",
+      "Softplastic",
+      "Cardboard",
+      "Office paper",
+      "Phonebooks",
+      "Chemicals",
+      "Chemical Drum",
+      "Food Scrape"
+    ]
+  },
+  {
+    "name": "Specsavers (Perth Cloisters)",
+    "address": "200 St Georges Terrace, Perth WA 6000, Australia",
+    "lattitude": -31.9529258,
+    "longitude": 115.8533778,
+    "recycling_materials": ["Eyeglasses"]
+  },
+  {
+    "name": "Officeworks, East Perth",
+    "address": "52-62 Lord Street, East Perth, WA 6004",
+    "lattitude": -31.9523533,
+    "longitude": 115.8683203,
+    "recycling_materials": [
+      "Computer Accessories",
+      "E-Readers",
+      "Mobile phones",
+      "Printer cartridges",
+      "Headphones"
+    ]
+  },
+  {
+    "name": "Perth 4wd Centre",
+    "address": "87 Kew St, Welshpool WA 6106, Australia",
+    "lattitude": -31.98628,
+    "longitude": 115.9294531,
+    "recycling_materials": ["Car Parts"]
   }
 ]

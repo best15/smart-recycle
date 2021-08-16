@@ -11,12 +11,7 @@
   },
   {
     "categoryname": "Hazardous",
-    "materialnames": [
-      "Asbestos",
-      "Chemicals",
-      "Chemical Drum",
-      "Outdated Medicines"
-    ]
+    "materialnames": ["Asbestos", "Chemicals", "Chemical Drum"]
   },
   {
     "categoryname": "Automotive",
@@ -35,8 +30,6 @@
   {
     "categoryname": "Household",
     "materialnames": [
-      "Clothing/Textiles",
-      "Cork",
       "Food Scrape",
       "Furniture",
       "Eyeglasses",
@@ -53,7 +46,6 @@
       "Headphones",
       "Mobile phones",
       "Printer cartridges",
-      "Mobile phones",
       "TV",
       "White goods",
       "X-ray films"
@@ -69,7 +61,7 @@
   },
   {
     "categoryname": "Glass",
-    "materialnames": ["Glass bottle and Jars", "Glasses"]
+    "materialnames": ["Glass bottle and Jars"]
   },
   {
     "categoryname": "Plastics",

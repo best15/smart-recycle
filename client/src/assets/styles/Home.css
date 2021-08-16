@@ -5,13 +5,29 @@
   justify-content: space-evenly;
   align-items: center;
 }
-.result {
+.result-container {
   display: flex;
   flex-direction: column;
   min-height: 90vh;
   justify-content: flex-start;
   align-items: center;
 }
+.recycle_centre_list {
+  max-height: 60vh;
+  left: 0;
+  right: 0;
+  top: 100%;
+  position: relative;
+  overflow: hidden;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+}
+
+.ui.grid {
+  margin: 0 !important;
+}
+
 .page-header {
   text-align: center;
   color: teal;
@@ -62,16 +78,25 @@
   border: white solid 1px;
 }
 
+.centre:hover {
+  background: rgb(200, 193, 193);
+}
+
 .name {
   /* text-align: center; */
   font-size: large;
   font-weight: bold;
 }
-
+.distance {
+  font-size: small;
+}
 .direction {
   display: flex;
   flex-direction: column;
   text-align: center;
+}
+.ui.teal.button {
+  border-radius: 20px;
 }
 
 .result-header {
@@ -80,18 +105,19 @@
   align-items: center;
   color: teal;
   margin-bottom: 20px;
+  margin: 0;
 }
 .result-location {
   font-size: large;
 }
 
 .result-sub-header {
-  background: rgb(45, 172, 45);
+  background: #00b5ad;
   color: white;
   font-size: large;
   justify-content: center;
   align-items: center;
-  padding: 4px;
+  padding: 5px;
   border-radius: 25px;
 }
 

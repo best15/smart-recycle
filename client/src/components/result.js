@@ -49,10 +49,10 @@ const Result = ({ selectedSearchMaterial, backtoSearch, selectedLatLon, searchLo
                         Back to Search
                     </button>
                 </div>
-                <div className="result">
+                <div className="result-container">
                     {loading ? (<h3>Loading....</h3>) :
                         <h1 className="noResult-header">No Results Found For
-                            <p className="noResult-sub-header">**Material {selectedSearchMaterial}** </p>
+                            <p className="noResult-sub-header">**Material: {selectedSearchMaterial}** </p>
                         </h1>}
                 </div>
             </div>
@@ -70,41 +70,47 @@ const Result = ({ selectedSearchMaterial, backtoSearch, selectedLatLon, searchLo
                             Back to Search
                         </button>
                     </div>
-                    <div className="result">
+                    <div className="result-container">
 
-                        <h1 className="result-header">Recycle Centres Nearby <p className="result-location">{searchLocation}</p> <p className="result-sub-header">For Material: {selectedSearchMaterial}</p></h1>
+                        <h1 className="result-header">Recycle Centres Nearby
+                            <p className="result-location">{searchLocation}</p>
+                        </h1>
+
+                        <p className="result-sub-header"> Material:{selectedSearchMaterial}</p>
                         {/* <div className="ui grid">
                             <div>Incoming Lat: {selectedLatLon.lat}</div>
                             <div>Incoming Lon: {selectedLatLon.lng}</div>
                         </div> */}
-                        {loading ? (<h3>Loading....</h3>) :
-                            sortedRecyleCentres.map((recycle_center, index) => {
-                                // let distance = getDistanceFromLatLonInKm(selectedLatLon.lat, selectedLatLon.lng, recycle_center.lattitude, recycle_center.longitude)
-                                let url = "https://www.google.com/maps/search/?api=1&query=" + recycle_center.name;
-                                return (
-                                    <div key={index} className="ui  two column centered grid container">
-                                        <div className="centre  column">
-                                            <div className="info">
-                                                <div className="name">{recycle_center.name.trim()}</div>
-                                                <small className="address"><i className="fas fa-map-marker-alt"></i>
-                                                    {recycle_center.address}</small>
-                                                {/* <div> Lat: {recycle_center.lattitude}</div>
+                        <div className="recycle_centre_list container">
+                            {loading ? (<h3>Loading....</h3>) :
+                                sortedRecyleCentres.map((recycle_center, index) => {
+                                    // let distance = getDistanceFromLatLonInKm(selectedLatLon.lat, selectedLatLon.lng, recycle_center.lattitude, recycle_center.longitude)
+                                    let url = "https://www.google.com/maps/search/?api=1&query=" + recycle_center.name;
+                                    return (
+                                        <div key={index} className=" ui  two column centered grid container">
+                                            <div className="centre  column">
+                                                <div className="info">
+                                                    <div className="name">{recycle_center.name.trim()}</div>
+                                                    <small className="address"><i className="fas fa-map-marker-alt"></i>
+                                                        {recycle_center.address}</small>
+                                                    <div className="distance">Distance: {Math.round(recycle_center.distance)}km</div>
+                                                    {/* <div> Lat: {recycle_center.lattitude}</div>
                                             <div> Lon: {recycle_center.longitude}</div> */}
-                                            </div>
-                                            <div className="direction">
-                                                <strong>Distance: {Math.round(recycle_center.distance)}km</strong>
-                                                <a href={url} target="_blank" className="row">
-                                                    <button className=" big ui green button">Direction</button>
-                                                </a>
+                                                </div>
+                                                <div className="direction">
+
+                                                    <a href={url} target="_blank" className="row">
+                                                        <button className="direction-button small ui teal button">Direction</button>
+                                                    </a>
 
 
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                )
-                            })
-                        }
-
+                                    )
+                                })
+                            }
+                        </div>
                     </div>
                 </div>
             </Fragment >
