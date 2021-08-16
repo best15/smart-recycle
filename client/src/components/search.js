@@ -24,6 +24,31 @@ const Search = ({
     const { loading, data } = useQuery(QUERY_CATEGORIES);
     const categories = data?.categories || [];
 
+    const allCategories = [];
+
+    // Create new array of available Category
+    categories.map((category) => {
+
+        const newcategory = new Object();
+        newcategory._id = category._id
+        newcategory.categoryname = category.categoryname;
+        newcategory.materials = category.materials
+
+        allCategories.push(newcategory);
+    })
+
+    // sort allCategories by name
+    const sortedCategories = allCategories.sort(function (a, b) {
+        let nameA = a.categoryname.toLowerCase();
+        let nameB = b.categoryname.toLowerCase();
+        if (nameA < nameB) //sort string ascending
+            return -1
+        if (nameA > nameB)
+            return 1
+        return 0
+
+    })
+
 
     return (
 
@@ -56,7 +81,7 @@ const Search = ({
             <div className="materials">
                 <div className="category-section ui five column grid container">
                     {loading ? (<h3>Loading....</h3>) :
-                        (categories.map((category) => (
+                        (sortedCategories.map((category) => (
                             <div key={category._id}
                                 className={selectedCategoryName === category.categoryname ? "category column selected" : "category column"}
                                 onClick={selectCategory}>{category.categoryname}</div>
@@ -66,7 +91,7 @@ const Search = ({
                 <div className="ui five column grid container">
                     <ul className="row itemlist">
 
-                        {(categories.map((category) => (category.categoryname === selectedCategoryName) && (
+                        {(sortedCategories.map((category) => (category.categoryname === selectedCategoryName) && (
                             category.materials.map((material) => <li key={material._id} className="items column" onClick={onClickMaterials}>{material.materialname}</li>))
                         ))}
                     </ul>

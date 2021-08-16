@@ -85,7 +85,7 @@
 .name {
   /* text-align: center; */
   font-size: large;
-  font-weight: bold;
+  font-weight: 600;
 }
 .distance {
   font-size: small;

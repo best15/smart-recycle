@@ -17,7 +17,7 @@ const Home = () => {
     const materials = data?.materials || [];
 
     const [selectedViewState, setSelectedViewState] = useState("search");
-    const [selectedCategoryName, setSelectedCategory] = useState("Metal");
+    const [selectedCategoryName, setSelectedCategory] = useState("Automotive");
     const [selectedSearchMaterial, setSelectedSearchMaterial] = useState("");
     const [searchLocation, setSearchLocation] = useState("");
     const [filteredList, setFilteredList] = useState([]);
