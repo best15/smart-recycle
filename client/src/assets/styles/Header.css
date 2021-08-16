@@ -4,6 +4,9 @@
 
 .header {
   background-color: teal !important;
+  /* display: flex !important;
+  justify-content: flex-start;
+  align-items: flex-start; */
 }
 .recycle-icon {
   margin-right: 5px;
@@ -22,6 +25,12 @@
 } */
 .ui.menu .item:after {
   height: none;
+}
+
+#header_container {
+  font-size: large;
+  font-weight: bold;
+  margin-left: 0 !important;
 }
 
 .greet {

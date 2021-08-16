@@ -16,7 +16,7 @@ const Header = () => {
         <div>
             <Menu className="header" fixed='top' inverted >
 
-                <Container>
+                <Container id="header_container">
                     <Link to="/">
                         <Menu.Item header>
                             <i className="recycle-icon fa fa-recycle" aria-hidden="true" />
